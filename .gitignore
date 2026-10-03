@@ -1,0 +1,24 @@
+# Build output and local tools
+**/bin/
+**/obj/
+/build/
+/artifacts/
+/.cache/
+/tools/
+/deps/
+/.vs/
+*.user
+*.suo
+*.log
+*.dll
+*.exe
+*.pdb
+*.lib
+*.bin
+*.zip
+# Local game configuration and credentials
+segatools.ini
+AquaMai.toml
+Config.yml
+.env
+.env.*

@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <MelonLoaderDir Condition="'$(MelonLoaderDir)' == '' and '$(GameRoot)' != ''">$(GameRoot)\MelonLoader\net35</MelonLoaderDir>
+    <MelonLoaderDir Condition="'$(MelonLoaderDir)' == ''">$(MSBuildThisFileDirectory)deps\MelonLoader\net35</MelonLoaderDir>
+  </PropertyGroup>
+  <Target Name="ValidateMelonReferences" BeforeTargets="ResolveAssemblyReferences" Condition="'$(MSBuildProjectName)' == 'NativeBridge' or '$(MSBuildProjectName)' == 'CoinTests'">
+    <Error Condition="!Exists('$(MelonLoaderDir)\MelonLoader.dll') or !Exists('$(MelonLoaderDir)\0Harmony.dll')" Text="Provide MelonLoader net35 reference DLLs using -p:MelonLoaderDir=PATH or build.ps1 -GameRoot PATH. See BUILDING.md." />
+  </Target>
+</Project>

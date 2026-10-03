@@ -1,0 +1,51 @@
+﻿Affine 单 DLL（2026-10-03）
+
+文件
+  affine_io_single.dll：安装到游戏根目录的整合 DLL。
+  AffineDeployer.exe：选择以后更新的原生 affine_io.dll，生成新的整合 DLL。
+  SHA256SUMS.txt：本次构建校验值。
+
+功能
+  保留原生 Affine I/O 导出，由 Segatools [mai2io] path 加载。
+  在游戏已有 Mono/MelonLoader 中运行内嵌灯光和实体 Coin 桥接，不释放第二个 DLL。
+  灯光转发两侧八键和 Body/Circle/Side；Billboard 仍走原链路。
+  实体 Coin 读取 AMDaemon.UsbIO 计数，通过已有 AquaMai VirtualCoin 加点，不模拟键盘。
+  点数及余币仅在当前游戏进程保留，重启清零，不写入后台持久账本。
+  遵循 CoinToCredit 和 CoinMultipliers；本版按当前游戏最高24点限制。
+  原生后台账本开始计入投币时，本次会话停止桥接并丢弃待处理队列，以避免重复加点。
+
+适用与验证
+  本地 SDGB1.56 / Unity 2018.4.7f1 / MelonLoader 0.6.4 net35 / x64 / AquaMai 1.9.18。
+  已验证原生77个导出保留、Windows加载、游戏中托管桥接启动、实体 Coin 加点。
+  灯光调用已有发送日志；当前测试板没有接灯，实体灯光效果尚未验证。
+  投币算法已验证重复轮询、计数回绕、重置、兑换余币、最高点数与屏蔽状态。
+
+安装
+1. 退出 Sinmai 和 AMDaemon，备份 segatools.ini 和 AquaMai.toml。
+2. 复制 affine_io_single.dll 到 Sinmai.exe 同级目录。
+3. 移走 Mods 中旧 AffineHostProbe.dll / AffineGameLights.dll，避免重复转发。
+4. segatools.ini 的 [mai2io] 设置 path=affine_io_single.dll。
+5. AquaMai.toml 启用以下段（已有同名段则编辑，不重复添加）：
+   [GameSystem.VirtualCoin]
+   CoinKey = "None"
+   IsUseRemote = false
+   IsPlaySound = false
+6. 保持现有 start.bat：使用 mai2hook.dll 注入 AMDaemon 和 Sinmai。
+   不需要另外用 inject 注入 affine_io_single.dll，它会由 Segatools 加载并启动桥接。
+
+日志
+  affine-single-native.log：QUEUED 表示内嵌代码已提交游戏线程。
+  affine-physical-coin.log：READY、PHYSICAL、ADD 分别表示桥接就绪、实体投币、加点。
+  AffineGameLights\bridge-*.log：灯光初始化与 GS_SENT / FET_SENT 记录。
+  AffineGameLights\config.ini：[lighting] brightness=0..255，默认128。
+
+测试与回退
+  工作区 physical-coin-test.bat 临时设置路径及 AquaMai，退出后自动恢复配置。
+  正式安装回退：退出游戏，将路径改回 affine_io.dll，恢复备份 AquaMai.toml。
+  不要在游戏运行时替换 DLL。
+
+以后更新
+  双击 AffineDeployer.exe，选择未整合的新版原生 affine_io.dll，选择尚不存在的输出路径，生成单 DLL。
+  工具不会覆盖输入或已有输出，会检查 PE 结构和必要导出。
+  新版若改变接口参数、协议、签名或布局，可能需要更新整合工具；每次更新应实机复测输入、扣点和灯光。
+  源码在工作区 affine_single。

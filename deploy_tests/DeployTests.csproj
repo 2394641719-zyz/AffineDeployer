@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net472</TargetFramework><AssemblyName>DeployTests</AssemblyName><LangVersion>latest</LangVersion></PropertyGroup>
+<ItemGroup><ProjectReference Include="../integrator/AffineIntegrator.csproj" /></ItemGroup>
+</Project>
