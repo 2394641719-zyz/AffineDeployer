@@ -28,7 +28,7 @@ Zig 已在 PATH 时可省略 `-ZigPath`。Windows SDK 库默认自动寻找，�
 
 只构建部署器不需要原版 Affine DLL；不提供 `-AffineDll` 时部署测试跳过。隔离测试不会修改真实游戏目录。
 
-投币算法测试使用模拟 AMDaemon/AquaMai 数据，不能替代游戏中 Mono 加载、硬件输入与实际扣点验证。灯光实体效果必须接灯实测。
+投币算法测试使用模拟 AMDaemon/AquaMai 数据，不能替代游戏中 Mono 加载、硬件输入与实际扣点验证。本版不编译灯光转发代码。
 
 ## 源码顺序
 

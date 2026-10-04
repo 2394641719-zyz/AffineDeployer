@@ -104,7 +104,7 @@ namespace AffineIntegrator {
                 foreach(string file in LegacyMods)if(File.Exists(Path.Combine(root,file)))File.Delete(Path.Combine(root,file));
                 File.WriteAllText(Path.Combine(backup,"completed.txt"),"Affine deployed "+DateTime.Now.ToString("O"),Encoding.UTF8);
             } catch { RestoreFiles(root,backup);throw; }
-            return "部署完成："+root+Environment.NewLine+"已部署单 DLL，修改 start.bat、segatools.ini 和 AquaMai.toml。旧 Affine Mods 插件已移入备份。"+Environment.NewLine+"备份："+backup+Environment.NewLine+"DLL SHA256："+PeMerge.Hash(merged)+Environment.NewLine+"使用原 start.bat 启动。点数重启清零；更新后请复测投币、扣点和灯光。";
+            return "部署完成："+root+Environment.NewLine+"已部署单 DLL，修改 start.bat、segatools.ini 和 AquaMai.toml。旧 Affine Mods 插件已移入备份。"+Environment.NewLine+"备份："+backup+Environment.NewLine+"DLL SHA256："+PeMerge.Hash(merged)+Environment.NewLine+"使用原 start.bat 启动。点数重启清零；更新后请复测投币、扣点和游戏稳定性。";
         }
         private static void RestoreFiles(string root,string backup) {
             var entries=File.ReadAllLines(Path.Combine(backup,"manifest.txt"));

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -31,8 +31,8 @@ namespace AffineIntegrator
             return "已生成单 DLL：" + b + Environment.NewLine
                 + "输入 SHA256：" + PeMerge.Hash(original) + Environment.NewLine
                 + "输出 SHA256：" + PeMerge.Hash(result) + Environment.NewLine
-                + "原生导出接口保留；已内嵌游戏灯光转发和实体投币桥接。投币桥接需启用 AquaMai VirtualCoin，CoinKey=None、IsUseRemote=false；点数重启清零。" + Environment.NewLine
-                + "接口名称检查不能保证任意新版 affine_io 的参数与灯光协议兼容。";
+                + "原生导出接口保留；仅内嵌实体投币桥接，灯光由现有 hook 处理。投币桥接需启用 AquaMai VirtualCoin，CoinKey=None、IsUseRemote=false；点数重启清零。" + Environment.NewLine
+                + "接口名称检查不能保证任意新版 affine_io 的参数与设备协议兼容。";
         }
         [STAThread]
         private static int Main(string[] args)

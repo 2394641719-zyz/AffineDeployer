@@ -9,7 +9,7 @@ Windows 使用系统 .NET Framework 4.7.2 或更高版本。
 4. 点击“一键整合并部署”，完成后用游戏原来的 start.bat 启动。
 
 自动执行
-- 生成并部署 affine_io_single.dll，包含原生 I/O、灯光转发和实体 Coin 加点。
+- 生成并部署 affine_io_single.dll，包含原生 I/O 和实体 Coin 加点，不附加灯光转发。
 - 将 segatools.ini 的 [mai2io] path 改为 affine_io_single.dll；[io4] enable=1、[button] enable=0。
 - 在 start.bat 中保留原启动参数，确保 AMDaemon 和 Sinmai 都由 mai2hook 注入，增加启动等待。
 - 配置 AquaMai VirtualCoin：CoinKey=None、IsUseRemote=false、IsPlaySound=false。
@@ -20,6 +20,6 @@ Windows 使用系统 .NET Framework 4.7.2 或更高版本。
 “仅生成单 DLL”可以生成文件，不修改游戏配置。
 重复部署可用于以后更新兼容的原版 affine_io.dll，不要选择已经整合过的 DLL。
 
-投币点数重启后清零。本机已验证实体加点和扣点；当前测试板没接灯，实体灯光尚未验证。
+投币点数重启后清零。本机已验证实体加点和扣点；本版已移除灯光转发，需要重新实机验证。
 工具针对当前 SDGB1.56 / MelonLoader 0.6.4 net35 / AquaMai 1.9.18 环境，不保证任意新版协议或复杂启动脚本兼容。
 目录权限不足时以管理员身份运行。
